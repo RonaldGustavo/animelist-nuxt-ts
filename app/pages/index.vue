@@ -6,12 +6,15 @@ import { ref, onMounted } from 'vue'
 import fetchAnimeList from '~/composables/useAnimeList'
 const data = ref<any>(null)
 const loading = ref(true)
-const search = ref('doraemon')
+const search = ref('')
+let firstLoad = true
 
 async function doSearch() {
   loading.value = true
-  data.value = await fetchAnimeList(search.value, 20)
+  const query = !search.value ? 'doraemon' : search.value
+  data.value = await fetchAnimeList(query, 20)
   loading.value = false
+  firstLoad = false
 }
 
 onMounted(async () => {
