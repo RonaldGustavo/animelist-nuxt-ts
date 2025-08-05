@@ -87,7 +87,7 @@ onMounted(async () => {
         </template>
       </template>
       <template v-else>
-        <div v-for="n in 8" :key="n" class="anime-card skeleton-card">
+        <div v-for="n in 18" :key="n" class="anime-card skeleton-card">
           <div class="anime-img skeleton-box"></div>
           <div class="anime-info">
             <div class="anime-title skeleton-box" style="width: 70%; height: 18px; margin: 0.5rem auto;"></div>
