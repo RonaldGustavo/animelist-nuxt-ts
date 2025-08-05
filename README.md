@@ -1,75 +1,27 @@
-# Nuxt Minimal Starter
+# 🌟 Welcome to My Anime app by Ronald Gustavo!
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern and responsive Anime List web application built with Nuxt 3 and TypeScript, using GraphQL to fetch data efficiently from a public anime API (e.g., AniList).
 
-## Setup
+## 🚀 Tech Stack Used
 
-Make sure to install dependencies:
+- **Nuxt.js** – The intuitive Vue.js framework for building SSR and static web applications.
+- **TypeScript** – Strongly typed JavaScript for scalable and maintainable code.
+- **Node.js** – JavaScript runtime environment for building fast and scalable backend services.
+- **Vanilla CSS** – Clean and minimal styling without relying on external CSS frameworks.
+- **GraphQL** – A flexible query language for APIs to fetch exactly what you need.
 
-```bash
-# npm
-npm install
+## ✨ UI Preview
 
-# pnpm
-pnpm install
+Here is the UI of this Anime app:
 
-# yarn
-yarn install
+![Landing Page](https://github.com/RonaldGustavo/animelist-nuxt-ts/blob/master/app/assets/images/landing_page.png)
 
-# bun
-bun install
-```
+![Searching Feature](https://github.com/RonaldGustavo/animelist-nuxt-ts/blob/master/app/assets/images/searching.png)
 
-## Development Server
+![Highlight View Feature](https://github.com/RonaldGustavo/animelist-nuxt-ts/blob/master/app/assets/images/highlight_detail.png)
 
-Start the development server on `http://localhost:3000`:
+![Skeleton Loading Feature](https://github.com/RonaldGustavo/animelist-nuxt-ts/blob/master/app/assets/images/skeleton_loading.png)
 
-```bash
-# npm
-npm run dev
+![No Data View](https://github.com/RonaldGustavo/animelist-nuxt-ts/blob/master/app/assets/images/no_data.png)
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+> You can also view the live site [here](https://animelist-nuxt-ts-epfl.vercel.app/)
