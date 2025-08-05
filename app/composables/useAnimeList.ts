@@ -1,7 +1,7 @@
 import { useNuxtApp } from '#app'
 import { gql } from '@apollo/client/core'
 
-export default async function fetchAnimeList(search = 'doraemon', perPage = 20) {
+export async function fetchAnimeList(search = 'doraemon', perPage = 20) {
   const app = useNuxtApp()
   const $apollo = app.$apollo
   if (!$apollo) {

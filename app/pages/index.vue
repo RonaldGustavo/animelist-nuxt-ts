@@ -3,7 +3,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import fetchAnimeList from '~/composables/useAnimeList'
 
 interface AnimeTitle {
   english?: string;
@@ -27,7 +26,6 @@ interface AnimePage {
 const data = ref<AnimePage | null>(null)
 const loading = ref<boolean>(true)
 const search = ref<string>('')
-let firstLoad = true
 
 
 async function doSearch() {
@@ -35,14 +33,12 @@ async function doSearch() {
   const query = !search.value ? 'doraemon' : search.value
   data.value = await fetchAnimeList(query, 20) as AnimePage
   loading.value = false
-  firstLoad = false
 }
 
 onMounted(async () => {
-  if (process.client) {
-    await doSearch()
-  }
+  await doSearch()
 })
+
 </script>
 
 
