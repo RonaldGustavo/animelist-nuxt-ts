@@ -4,15 +4,36 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import fetchAnimeList from '~/composables/useAnimeList'
-const data = ref<any>(null)
-const loading = ref(true)
-const search = ref('')
+
+interface AnimeTitle {
+  english?: string;
+  romaji: string;
+  native?: string;
+}
+interface AnimeCoverImage {
+  large?: string;
+}
+interface Anime {
+  id: number;
+  title: AnimeTitle;
+  coverImage?: AnimeCoverImage;
+}
+interface AnimePage {
+  Page: {
+    media: Anime[];
+  };
+}
+
+const data = ref<AnimePage | null>(null)
+const loading = ref<boolean>(true)
+const search = ref<string>('')
 let firstLoad = true
+
 
 async function doSearch() {
   loading.value = true
   const query = !search.value ? 'doraemon' : search.value
-  data.value = await fetchAnimeList(query, 20)
+  data.value = await fetchAnimeList(query, 20) as AnimePage
   loading.value = false
   firstLoad = false
 }
@@ -47,14 +68,23 @@ onMounted(async () => {
       </form>
     </header>
     <div class="anime-list">
-      <template v-if="!loading && data && data.Page && data.Page.media">
-        <div v-for="anime in data.Page.media" :key="anime.id" class="anime-card">
-          <img :src="anime.coverImage?.large" :alt="anime.title.romaji" class="anime-img" />
-          <div class="anime-info">
-            <div class="anime-title">{{ anime.title.romaji }}</div>
-            <div class="anime-title-sub">{{ anime.title.english || anime.title.native }}</div>
+      <template v-if="!loading && data && data.Page && Array.isArray(data.Page.media)">
+        <template v-if="data.Page.media.length > 0">
+          <div v-for="anime in data.Page.media" :key="anime.id" class="anime-card">
+            <img :src="anime.coverImage?.large" :alt="anime.title.romaji" class="anime-img" />
+            <div class="anime-info">
+              <div class="anime-title">{{ anime.title.romaji }}</div>
+              <div class="anime-title-sub">{{ anime.title.english || anime.title.native }}</div>
+            </div>
           </div>
-        </div>
+        </template>
+        <template v-else>
+          <div class="no-data">
+            <svg width="60" height="60" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#23262f"/><path d="M8 15h8M9 9h.01M15 9h.01" stroke="#4f8cff" stroke-width="2" stroke-linecap="round"/></svg>
+            <div class="no-data-title">Tidak ada anime ditemukan</div>
+            <div class="no-data-desc">Coba kata kunci lain.</div>
+          </div>
+        </template>
       </template>
       <template v-else>
         <div v-for="n in 8" :key="n" class="anime-card skeleton-card">
@@ -202,6 +232,27 @@ onMounted(async () => {
 }
 .anime-title-sub {
   font-size: 0.95rem;
+  color: #b5b5b5;
+}
+/* No Data UI */
+.no-data {
+  width: 100%;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  color: #b5b5b5;
+  margin-top: 2rem;
+}
+.no-data-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f1f1f1;
+}
+.no-data-desc {
+  font-size: 1rem;
   color: #b5b5b5;
 }
 /* Skeleton Loading */
